@@ -52,4 +52,13 @@ class AuthMethod {
        return _userFromFirebaseUser(studentUser!);
     } catch (e) {}
   }
+
+    Future createTeacherWithEmailPassword(String email, String password) async {
+    try {
+      UserCredential createdTeacherUser = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      User? teachertUser = createdTeacherUser.user;
+       return _userFromFirebaseUser(teachertUser!);
+    } catch (e) {}
+  }
 }

@@ -20,9 +20,13 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
-  int counter = 0;
+  // ignore: non_constant_identifier_names
+  int student_counter = 0;
+  // ignore: non_constant_identifier_names
+  int teacher_counter = 0;
   getCount() async {
-    counter = await DatabaseMethods().noOfStudent();
+    student_counter = await DatabaseMethods().noOfStudent();
+    teacher_counter = await DatabaseMethods().noOfTeachers();
     setState(() {});
   }
 
@@ -87,7 +91,7 @@ class _AdminHomeState extends State<AdminHome> {
                           children: [
                             Expanded(
                               child: ListTile(
-                                title: text(counter.toString(), 67.0),
+                                title: text(student_counter.toString(), 67.0),
                                 subtitle: text("Total Students", 27.0),
                               ),
                             ),
@@ -131,7 +135,7 @@ class _AdminHomeState extends State<AdminHome> {
                           children: [
                             Expanded(
                               child: ListTile(
-                                title: text("123", 67.0),
+                                title: text(teacher_counter.toString(), 67.0),
                                 subtitle: text("Total Teachers", 27.0),
                               ),
                             ),

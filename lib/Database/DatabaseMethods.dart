@@ -32,4 +32,25 @@ class DatabaseMethods {
     print("Number of users" + count.toString());
     return count;
   }
+
+  createTeacherData(createdTeacherInfo) async {
+    return await FirebaseFirestore.instance
+        .collection("teacher_users")
+        .add(createdTeacherInfo);
+  }
+
+  getTeacherBy(String email) async {
+    return await FirebaseFirestore.instance
+        .collection("teacher_users")
+        .where("email", isEqualTo: email)
+        .get();
+  }
+
+  Future<int> noOfTeachers() async {
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance.collection("teacher_users").get();
+    var count = snapshot.size;
+    print("Number of users" + count.toString());
+    return count;
+  }
 }
