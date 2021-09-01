@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "389325005903",
+    "project_id": "project-asms",
+    "storage_bucket": "project-asms.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389325005903:android:1d45b179dbdd4e3ed6b63a",
+        "android_client_info": {
+          "package_name": "com.example.asms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389325005903-ob3hg3bnvnfd2rh07qai263ui41rn7mk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8D7g3qizSjipZoukCtjAFjbqNW1AX7k0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389325005903-ob3hg3bnvnfd2rh07qai263ui41rn7mk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
