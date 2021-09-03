@@ -1,13 +1,15 @@
+import 'package:asms/Admin/AdminHome.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:asms/Constants/Widgets.dart';
+import 'package:asms/Student/StudentHome.dart';
 import 'package:asms/Teacher/TeacherHome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-Future<void> main() async{
-    WidgetsFlutterBinding.ensureInitialized();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
@@ -34,24 +36,49 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-     @override
+  @override
   void initState() {
     super.initState();
     getLoggedIn();
   }
+
   getLoggedIn() async {
-      await HelperFunctions.getUserLoggedInSharedPreference()
-          .then((value) async {
-            assert(value != null);
-        print(value);
-        if (value! == true) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => TeacherHome()),
-          );
-        } else {}
-      });
-    }
+    await HelperFunctions.getAdminLoggedInSharedPreference()
+        .then((value) async {
+      print("Admin LoggedIn SharedPrefs== $value");
+      if (value! == true) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => AdminHome()),
+        );
+      } else {
+        await HelperFunctions.getStudentLoggedInSharedPreference()
+            .then((value) async {
+          assert(value != null);
+          print("Student LoggedIn SharedPrefs== $value");
+          if (value! == true) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => StudentHome()),
+            );
+          } else {
+            await HelperFunctions.getTeacherLoggedInSharedPreference()
+                .then((value) async {
+              assert(value != null);
+              print("Teacher LoggedIn SharedPrefs== $value");
+              if (value! == true) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => TeacherHome()),
+                );
+              } else {}
+            });
+          }
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,9 +100,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     text("Get Started", 29),
-                    Image(
-                      height: 60,
-                      image: AssetImage('assets/5.png'))
+                    Image(height: 60, image: AssetImage('assets/5.png'))
                   ],
                 ),
               ),

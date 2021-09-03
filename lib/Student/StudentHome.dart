@@ -1,14 +1,17 @@
 import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:flutter/material.dart';
 
 class StudentHome extends StatefulWidget {
-  final String username;
-  final String email;
-  const StudentHome({Key? key, required this.username, required this.email})
-      : super(key: key);
+  // final String username;
+  // final String email;
+  const StudentHome({
+    Key? key,
+    //  required this.username, required this.email
+  }) : super(key: key);
 
   @override
   _StudentHomeState createState() => _StudentHomeState();
@@ -91,20 +94,24 @@ class _StudentHomeState extends State<StudentHome> {
                     children: [
                       GestureDetector(
                           onTap: () {},
-                          child: gridTile("Mark Attendence", "assets/1.png",context)),
+                          child: gridTile(
+                              "Mark Attendence", "assets/1.png", context)),
                       GestureDetector(
                           onTap: () {},
-                          child: gridTile("Find Attendence", "assets/1.png",context)),
+                          child: gridTile(
+                              "Find Attendence", "assets/1.png", context)),
                     ],
                   ),
                   Column(
                     children: [
                       GestureDetector(
                           onTap: () {},
-                          child: gridTile("Find Marks", "assets/1.png",context)),
+                          child:
+                              gridTile("Find Marks", "assets/1.png", context)),
                       GestureDetector(
                           onTap: () {},
-                          child: gridTile("Apply for Leave", "assets/1.png",context)),
+                          child: gridTile(
+                              "Apply for Leave", "assets/1.png", context)),
                     ],
                   ),
                 ],
@@ -126,10 +133,10 @@ class _StudentHomeState extends State<StudentHome> {
                   leading: CircleAvatar(
                       radius: 25,
                       child: Center(
-                        child: text(widget.username[0].toUpperCase(), 18),
+                        child: text("widget.username[0].toUpperCase()", 18),
                       )),
-                  title: text(widget.username, 16),
-                  subtitle: text(widget.email, 16),
+                  title: text("widget.username", 16),
+                  subtitle: text("widget.email", 16),
                 ),
               ),
               ListTile(
@@ -141,6 +148,8 @@ class _StudentHomeState extends State<StudentHome> {
                 onTap: () {
                   setState(() {
                     AuthMethod().signOut();
+                    HelperFunctions.saveStudentLoggedInSharedPreference(false);
+
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => LevelPage()));
                   });

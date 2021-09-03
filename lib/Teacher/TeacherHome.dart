@@ -1,5 +1,8 @@
+import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
+import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:flutter/material.dart';
 
 class TeacherHome extends StatefulWidget {
@@ -140,23 +143,18 @@ class _TeacherHomeState extends State<TeacherHome> {
             children: [
               drawerHeader,
               ListTile(
-                title: text("One", 16),
+                title: text("Logout", 16),
                 leading: const Icon(
-                  Icons.one_k,
+                  Icons.logout,
                   color: textColor,
                 ),
                 onTap: () {
-                  // Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: text("Two", 16),
-                leading: const Icon(
-                  Icons.comment,
-                  color: textColor,
-                ),
-                onTap: () {
-                  // Navigator.pop(context);
+                  setState(() {
+                    AuthMethod().signOut();
+                    HelperFunctions.saveTeacherLoggedInSharedPreference(false);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => LevelPage()));
+                  });
                 },
               ),
             ],

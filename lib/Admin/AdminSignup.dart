@@ -45,8 +45,8 @@ class _AdminSiginUpState extends State<AdminSiginUp> {
             context,
             MaterialPageRoute(
                 builder: (context) => AdminHome(
-                      username: usernameController.text,
-                      email: emailController.text,
+                      // username: usernameController.text,
+                      // email: emailController.text,
                     )));
       });
     }

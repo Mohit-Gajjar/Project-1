@@ -2,8 +2,10 @@ import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/ForgotPassword.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/Student/StudentHome.dart';
 import 'package:asms/Constants/Widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 
@@ -20,20 +22,29 @@ class _StudentLoginState extends State<StudentLogin> {
   TextEditingController passwordController = new TextEditingController();
   TextEditingController enrollController = new TextEditingController();
   String email = "";
+  QueryDocumentSnapshot? snapshot;
   signIn() async {
+     HelperFunctions.saveStudentEmailSharedPreference(emailController.text);
     if (formKey.currentState!.validate()) {
-      DatabaseMethods().getStudentBy(emailController.text);
+      DatabaseMethods().getStudentBy(emailController.text).then((val) {
+        snapshot = val;
+        HelperFunctions.saveStudentNameSharedPreference(
+            snapshot![0]["StudentName"].toString());
+      });
       AuthMethod()
           .signInWithEmailAndPassword(
               emailController.text, passwordController.text)
           .then((value) {
+            if(value != null){
+               HelperFunctions.saveAdminLoggedInSharedPreference(true);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => StudentHome(
-                      email: emailController.text,
-                      username: "Name",
+                      // email: emailController.text,
+                      // username: "Name",
                     )));
+            }
       });
     }
   }

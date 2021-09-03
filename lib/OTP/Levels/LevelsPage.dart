@@ -17,9 +17,6 @@ class _LevelPageState extends State<LevelPage> {
 
   @override
   Widget build(BuildContext context) {
- 
-    
-
     return Scaffold(
       backgroundColor: backColor,
       body: Container(

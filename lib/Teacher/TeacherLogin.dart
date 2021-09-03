@@ -2,8 +2,10 @@ import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/ForgotPassword.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/Teacher/TeacherHome.dart';
 import 'package:asms/Constants/Widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class TeacherLogin extends StatefulWidget {
@@ -17,16 +19,24 @@ class _TeacherLoginState extends State<TeacherLogin> {
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-
+  QueryDocumentSnapshot? snapshot;
   signIn() async {
-    DatabaseMethods().getTeacherBy(emailController.text);
+     HelperFunctions.saveTeacherEmailSharedPreference(emailController.text);
+    DatabaseMethods().getTeacherBy(emailController.text).then((val) {
+        snapshot = val;
+        HelperFunctions.saveTeacherNameSharedPreference(
+            snapshot![0]["name"].toString());
+      });
     AuthMethod()
         .signInWithEmailAndPassword(
             emailController.text, passwordController.text)
         .then((value) {
-      Navigator.pushReplacement(
+    if (value != null) {
+       HelperFunctions.saveTeacherLoggedInSharedPreference(true);
+        Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => TeacherHome()));
       print("Teacher Login is working");
+    }
     });
   }
 

@@ -24,10 +24,10 @@ class _AdminLoginState extends State<AdminLogin> {
 
   signIn() {
     if (formKey.currentState!.validate()) {
-      HelperFunctions.saveUserEmailSharedPreference(emailController.text);
+      HelperFunctions.saveAdminEmailSharedPreference(emailController.text);
       DatabaseMethods().getUserBy(emailController.text).then((val) {
         snapshot = val;
-        HelperFunctions.saveUserNameSharedPreference(
+        HelperFunctions.saveAdminNameSharedPreference(
             snapshot![0]["username"].toString());
       });
       AuthMethod()
@@ -35,13 +35,14 @@ class _AdminLoginState extends State<AdminLogin> {
               emailController.text, passwordController.text)
           .then((value) {
         if (value != null) {
-            HelperFunctions.saveUserLoggedInSharedPreference(true);
+            HelperFunctions.saveAdminLoggedInSharedPreference(true);
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => AdminHome(
-                      email: emailController.text,
-                      username: usernameController.text)));
+                      // email: emailController.text,
+                      // username: usernameController.text))
+              )));
         }
       });
     }

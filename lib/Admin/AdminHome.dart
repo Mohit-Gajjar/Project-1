@@ -7,14 +7,17 @@ import 'package:asms/Create%20Users/CreateStudent.dart';
 import 'package:asms/Create%20Users/CreateSubjects.dart';
 import 'package:asms/Create%20Users/CreateTeacher.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatefulWidget {
-  final String username;
-  final String email;
-  AdminHome({Key? key, required this.username, required this.email})
-      : super(key: key);
+  // final String username;
+  // final String email;
+  AdminHome({
+    Key? key,
+    // required this.username, required this.email
+  }) : super(key: key);
   @override
   _AdminHomeState createState() => _AdminHomeState();
 }
@@ -47,7 +50,7 @@ class _AdminHomeState extends State<AdminHome> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: text(widget.username, 20),
+        title: text("widget.username", 20),
         centerTitle: true,
         actions: [
           IconButton(
@@ -407,10 +410,10 @@ class _AdminHomeState extends State<AdminHome> {
                   leading: CircleAvatar(
                       radius: 25,
                       child: Center(
-                        child: text(widget.username[0].toUpperCase(), 18),
+                        child: text("widget.username[0].toUpperCase()", 18),
                       )),
-                  title: text(widget.username, 16),
-                  subtitle: text(widget.email, 16),
+                  title: text("widget.username", 16),
+                  subtitle: text("widget.email", 16),
                 ),
               ),
               ListTile(
@@ -422,6 +425,7 @@ class _AdminHomeState extends State<AdminHome> {
                 onTap: () {
                   setState(() {
                     AuthMethod().signOut();
+                    HelperFunctions.saveAdminLoggedInSharedPreference(false);
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => LevelPage()));
                   });
