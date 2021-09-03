@@ -54,6 +54,7 @@ class _AdminHomeState extends State<AdminHome> {
               onPressed: () {
                 setState(() {
                   getCount();
+                  print(MediaQuery.of(context).size.width);
                 });
               },
               icon: Icon(
@@ -354,32 +355,36 @@ class _AdminHomeState extends State<AdminHome> {
                       children: [
                         GestureDetector(
                             onTap: () {},
-                            child: gridTile("Manage Student", "assets/1.png")),
+                            child: gridTile(
+                                "Manage Student", "assets/1.png", context)),
                         GestureDetector(
                             onTap: () {},
-                            child: gridTile("Manage Teacher", "assets/1.png")),
+                            child: gridTile(
+                                "Manage Teacher", "assets/1.png", context)),
                       ],
                     ),
                     Column(
                       children: [
                         GestureDetector(
                             onTap: () {},
-                            child: gridTile("Manage Subject", "assets/1.png")),
+                            child: gridTile(
+                                "Manage Subject", "assets/1.png", context)),
                         GestureDetector(
                             onTap: () {},
-                            child: gridTile("Manage Lecture", "assets/1.png")),
+                            child: gridTile(
+                                "Manage Lecture", "assets/1.png", context)),
                       ],
                     ),
                     Column(
                       children: [
                         GestureDetector(
                             onTap: () {},
-                            child:
-                                gridTile("Student`s Complain", "assets/1.png")),
+                            child: gridTile(
+                                "Student`s Complain", "assets/1.png", context)),
                         GestureDetector(
                             onTap: () {},
-                            child:
-                                gridTile("Teacher`s Complain", "assets/1.png")),
+                            child: gridTile(
+                                "Teacher`s Complain", "assets/1.png", context)),
                       ],
                     ),
                   ],

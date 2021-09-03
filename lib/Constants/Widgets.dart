@@ -147,14 +147,12 @@ Widget tbox(String title, subtitle, double titleSize, subtitleSize,
   );
 }
 
-Widget gridTile(
-  String title,
-  String assetImage,
-) {
+Widget gridTile(String title, String assetImage, BuildContext context) {
   return Container(
     margin: EdgeInsets.all(5),
     height: 150,
-    width: 160,
+    width: 200,
+
     decoration:
         BoxDecoration(color: btnColor, borderRadius: BorderRadius.circular(18)),
     child: Column(

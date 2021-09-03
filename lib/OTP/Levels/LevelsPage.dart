@@ -6,11 +6,20 @@ import 'package:asms/Teacher/TeacherLogin.dart';
 import 'package:asms/Constants/Widgets.dart';
 import 'package:flutter/material.dart';
 
-class LevelPage extends StatelessWidget {
+class LevelPage extends StatefulWidget {
   const LevelPage({Key? key}) : super(key: key);
 
   @override
+  _LevelPageState createState() => _LevelPageState();
+}
+
+class _LevelPageState extends State<LevelPage> {
+
+  @override
   Widget build(BuildContext context) {
+ 
+    
+
     return Scaffold(
       backgroundColor: backColor,
       body: Container(
@@ -30,24 +39,24 @@ class LevelPage extends StatelessWidget {
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => StudentLogin())),
                 child: btn("Student", 60)),
-           SizedBox(
-             height: 15,
-           ),
-           GestureDetector(
-               onTap: () => Navigator.push(context,
-                   MaterialPageRoute(builder: (context) => TeacherLogin())),
-               child: btn("Teacher", 60)),
-           SizedBox(
-             height: 15,
-           ),
-           GestureDetector(
-               onTap: () => Navigator.push(context,
-                   MaterialPageRoute(builder: (context) => AdminLogin())),
-               child: btn("Admin", 60)),
-           SizedBox(
-             height: 10,
-           ),
-           Container(
+            SizedBox(
+              height: 15,
+            ),
+            GestureDetector(
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TeacherLogin())),
+                child: btn("Teacher", 60)),
+            SizedBox(
+              height: 15,
+            ),
+            GestureDetector(
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AdminLogin())),
+                child: btn("Admin", 60)),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
               width: MediaQuery.of(context).size.width - 60,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

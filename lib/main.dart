@@ -1,6 +1,8 @@
 import 'package:asms/Constants/Constants.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:asms/Constants/Widgets.dart';
+import 'package:asms/Teacher/TeacherHome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +34,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+     @override
+  void initState() {
+    super.initState();
+    getLoggedIn();
+  }
+  getLoggedIn() async {
+      await HelperFunctions.getUserLoggedInSharedPreference()
+          .then((value) async {
+            assert(value != null);
+        print(value);
+        if (value! == true) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => TeacherHome()),
+          );
+        } else {}
+      });
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -17,7 +17,7 @@ class _TeacherLoginState extends State<TeacherLogin> {
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
- 
+
   signIn() async {
     DatabaseMethods().getTeacherBy(emailController.text);
     AuthMethod()
@@ -48,8 +48,8 @@ class _TeacherLoginState extends State<TeacherLogin> {
                 SizedBox(
                   height: 20,
                 ),
-                inputFieldemail("Enter Email", Icons.person, context,
-                    emailController),
+                inputFieldemail(
+                    "Enter Email", Icons.person, context, emailController),
                 SizedBox(
                   height: 20,
                 ),

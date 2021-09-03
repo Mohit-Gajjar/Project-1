@@ -4,6 +4,8 @@ import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/ForgotPassword.dart';
 import 'package:asms/Constants/Widgets.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AdminLogin extends StatefulWidget {
@@ -18,20 +20,28 @@ class _AdminLoginState extends State<AdminLogin> {
   TextEditingController passwordController = new TextEditingController();
   TextEditingController usernameController = new TextEditingController();
   final formKey = GlobalKey<FormState>();
+  QueryDocumentSnapshot? snapshot;
 
   signIn() {
     if (formKey.currentState!.validate()) {
-      DatabaseMethods().getUserBy(emailController.text);
+      HelperFunctions.saveUserEmailSharedPreference(emailController.text);
+      DatabaseMethods().getUserBy(emailController.text).then((val) {
+        snapshot = val;
+        HelperFunctions.saveUserNameSharedPreference(
+            snapshot![0]["username"].toString());
+      });
       AuthMethod()
-          .signInWithEmailAndPassword(emailController.text, passwordController.text)
+          .signInWithEmailAndPassword(
+              emailController.text, passwordController.text)
           .then((value) {
-        if(value != null){
+        if (value != null) {
+            HelperFunctions.saveUserLoggedInSharedPreference(true);
           Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => AdminHome(
-                    email: emailController.text,
-                    username: usernameController.text)));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AdminHome(
+                      email: emailController.text,
+                      username: usernameController.text)));
         }
       });
     }
@@ -40,7 +50,6 @@ class _AdminLoginState extends State<AdminLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
- 
       backgroundColor: backColor,
       body: SingleChildScrollView(
         child: Container(
@@ -56,17 +65,18 @@ class _AdminLoginState extends State<AdminLogin> {
                 SizedBox(
                   height: 20,
                 ),
-                inputFieldUsername(
-                    "Enter Username", Icons.person, context, usernameController),
+                inputFieldUsername("Enter Username", Icons.person, context,
+                    usernameController),
                 SizedBox(
                   height: 20,
                 ),
-                inputFieldemail("Enter Email", Icons.person, context, emailController),
+                inputFieldemail(
+                    "Enter Email", Icons.person, context, emailController),
                 SizedBox(
                   height: 20,
                 ),
-                inputFieldPass(
-                    "Enter Password", Icons.vpn_key, context, passwordController),
+                inputFieldPass("Enter Password", Icons.vpn_key, context,
+                    passwordController),
                 SizedBox(
                   height: 10,
                 ),
@@ -92,9 +102,9 @@ class _AdminLoginState extends State<AdminLogin> {
                       if (emailController.text.isNotEmpty &&
                           passwordController.text.isNotEmpty &&
                           usernameController.text.isNotEmpty) {
-                       setState(() {
+                        setState(() {
                           signIn();
-                       });
+                        });
                       }
                     },
                     child: btn("Login", 100))

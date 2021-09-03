@@ -46,6 +46,10 @@ class DatabaseMethods {
         .get();
   }
 
+// getTeacherName(String email) async {
+//   return await FirebaseFirestore.instance.collection("teacher_users")
+// }
+
   Future<int> noOfTeachers() async {
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await FirebaseFirestore.instance.collection("teacher_users").get();

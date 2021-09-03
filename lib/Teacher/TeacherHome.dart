@@ -96,20 +96,20 @@ class _TeacherHomeState extends State<TeacherHome> {
                       children: [
                         GestureDetector(
                             onTap: () {},
-                            child: gridTile("Mark Attendence", "assets/1.png")),
+                            child: gridTile("Mark Attendence", "assets/1.png",context)),
                         GestureDetector(
                             onTap: () {},
-                            child: gridTile("View attendence", "assets/1.png")),
+                            child: gridTile("View attendence", "assets/1.png",context)),
                       ],
                     ),
                     Column(
                       children: [
                         GestureDetector(
                             onTap: () {},
-                            child: gridTile("Manage Subject", "assets/1.png")),
+                            child: gridTile("Manage Subject", "assets/1.png",context)),
                         GestureDetector(
                             onTap: () {},
-                            child: gridTile("Manage Lecture", "assets/1.png")),
+                            child: gridTile("Manage Lecture", "assets/1.png",context)),
                       ],
                     ),
                     Column(
@@ -117,12 +117,12 @@ class _TeacherHomeState extends State<TeacherHome> {
                         GestureDetector(
                             onTap: () {},
                             child:
-                                gridTile("Student`s Complain", "assets/1.png")),
+                                gridTile("Student`s Complain", "assets/1.png",context)),
                         GestureDetector(
                             onTap: () {},
                             child:
-                                gridTile("Teacher`s Complain", "assets/1.png")),
-                      ],
+                                gridTile("Teacher`s Complain", "assets/1.png",context),
+                        )],
                     ),
                   ],
                 ),

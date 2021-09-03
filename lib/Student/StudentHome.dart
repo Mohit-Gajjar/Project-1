@@ -91,20 +91,20 @@ class _StudentHomeState extends State<StudentHome> {
                     children: [
                       GestureDetector(
                           onTap: () {},
-                          child: gridTile("Mark Attendence", "assets/1.png")),
+                          child: gridTile("Mark Attendence", "assets/1.png",context)),
                       GestureDetector(
                           onTap: () {},
-                          child: gridTile("Find Attendence", "assets/1.png")),
+                          child: gridTile("Find Attendence", "assets/1.png",context)),
                     ],
                   ),
                   Column(
                     children: [
                       GestureDetector(
                           onTap: () {},
-                          child: gridTile("Find Marks", "assets/1.png")),
+                          child: gridTile("Find Marks", "assets/1.png",context)),
                       GestureDetector(
                           onTap: () {},
-                          child: gridTile("Apply for Leave", "assets/1.png")),
+                          child: gridTile("Apply for Leave", "assets/1.png",context)),
                     ],
                   ),
                 ],
