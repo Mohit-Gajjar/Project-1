@@ -6,11 +6,8 @@ import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:flutter/material.dart';
 
 class StudentHome extends StatefulWidget {
-  // final String username;
-  // final String email;
   const StudentHome({
     Key? key,
-    //  required this.username, required this.email
   }) : super(key: key);
 
   @override
@@ -19,7 +16,20 @@ class StudentHome extends StatefulWidget {
 
 class _StudentHomeState extends State<StudentHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  String name = " ";
+  String email = " ";
+  getData() async {
+    name = (await HelperFunctions.getStudentNameSharedPreference())!;
+    email = (await HelperFunctions.getStudentEmailSharedPreference())!;
+  setState(() {
+    
+  });
+  }
+   @override
+  void initState() {
+    super.initState();
+    getData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +40,7 @@ class _StudentHomeState extends State<StudentHome> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: text("Bruce Banner", 20),
+        title: text(name, 20),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -88,33 +98,36 @@ class _StudentHomeState extends State<StudentHome> {
               height: 15,
             ),
             Container(
-              child: Row(
-                children: [
-                  Column(
-                    children: [
-                      GestureDetector(
-                          onTap: () {},
-                          child: gridTile(
-                              "Mark Attendence", "assets/1.png", context)),
-                      GestureDetector(
-                          onTap: () {},
-                          child: gridTile(
-                              "Find Attendence", "assets/1.png", context)),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      GestureDetector(
-                          onTap: () {},
-                          child:
-                              gridTile("Find Marks", "assets/1.png", context)),
-                      GestureDetector(
-                          onTap: () {},
-                          child: gridTile(
-                              "Apply for Leave", "assets/1.png", context)),
-                    ],
-                  ),
-                ],
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        GestureDetector(
+                            onTap: () {},
+                            child: gridTile(
+                                "Mark Attendence", "assets/1.png", context)),
+                        GestureDetector(
+                            onTap: () {},
+                            child: gridTile(
+                                "Find Attendence", "assets/1.png", context)),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(
+                            onTap: () {},
+                            child: gridTile(
+                                "Find Marks", "assets/1.png", context)),
+                        GestureDetector(
+                            onTap: () {},
+                            child: gridTile(
+                                "Apply for Leave", "assets/1.png", context)),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           ],
@@ -133,10 +146,10 @@ class _StudentHomeState extends State<StudentHome> {
                   leading: CircleAvatar(
                       radius: 25,
                       child: Center(
-                        child: text("widget.username[0].toUpperCase()", 18),
+                        child: text(name[0].toUpperCase(), 18),
                       )),
-                  title: text("widget.username", 16),
-                  subtitle: text("widget.email", 16),
+                  title: text(name, 16),
+                  subtitle: text(email, 16),
                 ),
               ),
               ListTile(

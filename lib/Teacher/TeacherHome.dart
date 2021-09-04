@@ -1,6 +1,7 @@
 import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
+import 'package:asms/Database/DatabaseMethods.dart';
 import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:flutter/material.dart';
@@ -13,24 +14,27 @@ class TeacherHome extends StatefulWidget {
 }
 
 class _TeacherHomeState extends State<TeacherHome> {
+  // ignore: non_constant_identifier_names
+  int student_counter = 0;
+  // ignore: non_constant_identifier_names
+  int teacher_counter = 0;
+  String name = " ";
+  String email = " ";
+  getData() async {
+    name = (await HelperFunctions.getTeacherNameSharedPreference())!;
+    email = (await HelperFunctions.getTeacherEmailSharedPreference())!;
+    student_counter = await DatabaseMethods().noOfStudent();
+    teacher_counter = await DatabaseMethods().noOfTeachers();
+    setState(() {});
+  }
+
+    @override
+  void initState() {
+    super.initState();
+    getData();
+  }
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final drawerHeader = UserAccountsDrawerHeader(
-    decoration: BoxDecoration(
-      color: boxColor,
-    ),
-    accountName: Text(
-      "Stanlee",
-    ),
-    accountEmail: Text(
-      "stan@gmail.com",
-    ),
-    currentAccountPicture: const CircleAvatar(
-      // backgroundImage: AssetImage('assets/steve.png'),
-      child: Center(
-        child: Icon(Icons.people_outline),
-      ),
-    ),
-  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +45,7 @@ class _TeacherHomeState extends State<TeacherHome> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: text("StanLee", 20),
+        title: text(name, 20),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -60,8 +64,8 @@ class _TeacherHomeState extends State<TeacherHome> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    tbox("1234", "Total Students", 67.0, 27.0, context),
-                    tbox("121", "Total Teachers", 67.0, 27.0, context),
+                    tbox(student_counter.toString(), "Total Students", 67.0, 27.0, context),
+                    tbox(teacher_counter.toString(), "Total Teachers", 67.0, 27.0, context),
                     tbox("1", "Total HODs", 67.0, 27.0, context),
                     tbox("38", "Total Subjects", 67.0, 27.0, context),
                     tbox("210", "Total Lectures", 67.0, 27.0, context),
@@ -141,7 +145,18 @@ class _TeacherHomeState extends State<TeacherHome> {
         child: Drawer(
           child: ListView(
             children: [
-              drawerHeader,
+              DrawerHeader(
+                decoration: BoxDecoration(color: boxColor),
+                child: ListTile(
+                  leading: CircleAvatar(
+                      radius: 25,
+                      child: Center(
+                        child: text(name[0].toUpperCase(), 18),
+                      )),
+                  title: text(name, 16),
+                  subtitle: text(email, 16),
+                ),
+              ),
               ListTile(
                 title: text("Logout", 16),
                 leading: const Icon(

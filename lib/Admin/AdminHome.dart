@@ -24,8 +24,8 @@ class _AdminHomeState extends State<AdminHome> {
   int student_counter = 0;
   // ignore: non_constant_identifier_names
   int teacher_counter = 0;
-  String name = "";
-  String email = "";
+  String name = " ";
+  String email = " ";
   getCount() async {
     name = (await HelperFunctions.getAdminNameSharedPreference())!;
     email = (await HelperFunctions.getAdminEmailSharedPreference())!;

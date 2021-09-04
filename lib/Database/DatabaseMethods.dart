@@ -5,7 +5,7 @@ class DatabaseMethods {
     FirebaseFirestore.instance.collection("admin_users").add(userMap);
   }
 
-  getUserBy(String email) async {
+  getAdminBy(String email) async {
     return await FirebaseFirestore.instance
         .collection("admin_users")
         .where("email", isEqualTo: email)
@@ -21,7 +21,7 @@ class DatabaseMethods {
   getStudentBy(String email) async {
     return await FirebaseFirestore.instance
         .collection("student_users")
-        .where("StudentEnrollmentNo", isEqualTo: email)
+        .where("StudentEmail", isEqualTo: email)
         .get();
   }
 

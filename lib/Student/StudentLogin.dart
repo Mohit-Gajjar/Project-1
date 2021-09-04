@@ -21,7 +21,6 @@ class _StudentLoginState extends State<StudentLogin> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController enrollController = new TextEditingController();
-  String email = "";
   QuerySnapshot? snapshot;
   signIn() async {
     HelperFunctions.saveStudentEmailSharedPreference(emailController.text);
@@ -36,13 +35,11 @@ class _StudentLoginState extends State<StudentLogin> {
               emailController.text, passwordController.text)
           .then((value) {
         if (value != null) {
-          HelperFunctions.saveAdminLoggedInSharedPreference(true);
+          HelperFunctions.saveStudentLoggedInSharedPreference(true);
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => StudentHome(
-                      // email: emailController.text,
-                      // username: "Name",
                       )));
         }
       });

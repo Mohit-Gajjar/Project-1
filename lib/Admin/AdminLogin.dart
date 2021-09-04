@@ -18,14 +18,14 @@ class AdminLogin extends StatefulWidget {
 class _AdminLoginState extends State<AdminLogin> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-  TextEditingController usernameController = new TextEditingController();
+
   final formKey = GlobalKey<FormState>();
   QuerySnapshot? snapshot;
 
   signIn() {
     if (formKey.currentState!.validate()) {
       HelperFunctions.saveAdminEmailSharedPreference(emailController.text);
-      DatabaseMethods().getUserBy(emailController.text).then((val) {
+      DatabaseMethods().getAdminBy(emailController.text).then((val) {
         snapshot = val;
         HelperFunctions.saveAdminNameSharedPreference(
             snapshot!.docs[0]["username"]);
@@ -62,11 +62,7 @@ class _AdminLoginState extends State<AdminLogin> {
                 ),
                 imageBox('assets/1.png', 300),
                 text("Admin Login", 30),
-                SizedBox(
-                  height: 20,
-                ),
-                inputFieldUsername("Enter Username", Icons.person, context,
-                    usernameController),
+            
                 SizedBox(
                   height: 20,
                 ),
@@ -100,8 +96,7 @@ class _AdminLoginState extends State<AdminLogin> {
                 GestureDetector(
                     onTap: () {
                       if (emailController.text.isNotEmpty &&
-                          passwordController.text.isNotEmpty &&
-                          usernameController.text.isNotEmpty) {
+                          passwordController.text.isNotEmpty) {
                         setState(() {
                           signIn();
                         });
