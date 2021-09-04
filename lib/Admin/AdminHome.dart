@@ -8,6 +8,7 @@ import 'package:asms/Create%20Users/CreateSubjects.dart';
 import 'package:asms/Create%20Users/CreateTeacher.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
 import 'package:asms/LocalDatabase/SharedPrefs.dart';
+import 'package:asms/Management/ManageStudent.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:flutter/material.dart';
 
@@ -358,7 +359,9 @@ class _AdminHomeState extends State<AdminHome> {
                     Column(
                       children: [
                         GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(context,MaterialPageRoute(builder: (context) => ManageStudent()));
+                            },
                             child: gridTile(
                                 "Manage Student", "assets/1.png", context)),
                         GestureDetector(
