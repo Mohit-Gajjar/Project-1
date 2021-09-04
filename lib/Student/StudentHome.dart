@@ -149,7 +149,6 @@ class _StudentHomeState extends State<StudentHome> {
                   setState(() {
                     AuthMethod().signOut();
                     HelperFunctions.saveStudentLoggedInSharedPreference(false);
-
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => LevelPage()));
                   });

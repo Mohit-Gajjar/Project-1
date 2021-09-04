@@ -18,7 +18,7 @@ class HelperFunctions {
       bool isUserLoggedIn) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.setBool(
-        sharedPreferenceAdminEmailKey, isUserLoggedIn);
+        sharedPreferenceAdminLoggedInKey, isUserLoggedIn);
   }
 
   static Future<bool> saveStudentLoggedInSharedPreference(
@@ -80,15 +80,15 @@ class HelperFunctions {
   }
 // ================================================================================================================
 
-  static Future<String?> getAdminNameSharedPreference(doc) async {
+  static Future<String?> getAdminNameSharedPreference() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString(sharedPreferenceAdminNameKey);
   }
-    static Future<String?> getStudentNameSharedPreference(doc) async {
+    static Future<String?> getStudentNameSharedPreference() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString(sharedPreferenceStudentNameKey);
   }
-    static Future<String?> getTeacherNameSharedPreference(doc) async {
+    static Future<String?> getTeacherNameSharedPreference() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString(sharedPreferenceTeacherNameKey);
   }

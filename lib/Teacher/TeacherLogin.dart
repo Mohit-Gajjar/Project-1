@@ -19,13 +19,13 @@ class _TeacherLoginState extends State<TeacherLogin> {
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-  QueryDocumentSnapshot? snapshot;
+  QuerySnapshot? snapshot;
   signIn() async {
      HelperFunctions.saveTeacherEmailSharedPreference(emailController.text);
     DatabaseMethods().getTeacherBy(emailController.text).then((val) {
         snapshot = val;
         HelperFunctions.saveTeacherNameSharedPreference(
-            snapshot![0]["name"].toString());
+            snapshot!.docs[0]["name"]);
       });
     AuthMethod()
         .signInWithEmailAndPassword(

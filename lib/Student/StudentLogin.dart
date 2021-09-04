@@ -22,29 +22,29 @@ class _StudentLoginState extends State<StudentLogin> {
   TextEditingController passwordController = new TextEditingController();
   TextEditingController enrollController = new TextEditingController();
   String email = "";
-  QueryDocumentSnapshot? snapshot;
+  QuerySnapshot? snapshot;
   signIn() async {
-     HelperFunctions.saveStudentEmailSharedPreference(emailController.text);
+    HelperFunctions.saveStudentEmailSharedPreference(emailController.text);
     if (formKey.currentState!.validate()) {
       DatabaseMethods().getStudentBy(emailController.text).then((val) {
         snapshot = val;
         HelperFunctions.saveStudentNameSharedPreference(
-            snapshot![0]["StudentName"].toString());
+            snapshot!.docs[0]["StudentName"]);
       });
       AuthMethod()
           .signInWithEmailAndPassword(
               emailController.text, passwordController.text)
           .then((value) {
-            if(value != null){
-               HelperFunctions.saveAdminLoggedInSharedPreference(true);
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => StudentHome(
+        if (value != null) {
+          HelperFunctions.saveAdminLoggedInSharedPreference(true);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => StudentHome(
                       // email: emailController.text,
                       // username: "Name",
-                    )));
-            }
+                      )));
+        }
       });
     }
   }

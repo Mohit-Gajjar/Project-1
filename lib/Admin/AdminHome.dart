@@ -12,11 +12,8 @@ import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatefulWidget {
-  // final String username;
-  // final String email;
   AdminHome({
     Key? key,
-    // required this.username, required this.email
   }) : super(key: key);
   @override
   _AdminHomeState createState() => _AdminHomeState();
@@ -27,7 +24,11 @@ class _AdminHomeState extends State<AdminHome> {
   int student_counter = 0;
   // ignore: non_constant_identifier_names
   int teacher_counter = 0;
+  String name = "";
+  String email = "";
   getCount() async {
+    name = (await HelperFunctions.getAdminNameSharedPreference())!;
+    email = (await HelperFunctions.getAdminEmailSharedPreference())!;
     student_counter = await DatabaseMethods().noOfStudent();
     teacher_counter = await DatabaseMethods().noOfTeachers();
     setState(() {});
@@ -50,7 +51,7 @@ class _AdminHomeState extends State<AdminHome> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: text("widget.username", 20),
+        title: text(name, 20),
         centerTitle: true,
         actions: [
           IconButton(
@@ -410,10 +411,10 @@ class _AdminHomeState extends State<AdminHome> {
                   leading: CircleAvatar(
                       radius: 25,
                       child: Center(
-                        child: text("widget.username[0].toUpperCase()", 18),
+                        child: text(name[0].toUpperCase(), 18),
                       )),
-                  title: text("widget.username", 16),
-                  subtitle: text("widget.email", 16),
+                  title: text(name, 16),
+                  subtitle: text(email, 16),
                 ),
               ),
               ListTile(

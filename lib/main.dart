@@ -46,36 +46,34 @@ class _HomeState extends State<Home> {
     await HelperFunctions.getAdminLoggedInSharedPreference()
         .then((value) async {
       print("Admin LoggedIn SharedPrefs== $value");
-      if (value! == true) {
+      if (value == true) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => AdminHome()),
         );
-      } else {
-        await HelperFunctions.getStudentLoggedInSharedPreference()
-            .then((value) async {
-          assert(value != null);
-          print("Student LoggedIn SharedPrefs== $value");
-          if (value! == true) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => StudentHome()),
-            );
-          } else {
-            await HelperFunctions.getTeacherLoggedInSharedPreference()
-                .then((value) async {
-              assert(value != null);
-              print("Teacher LoggedIn SharedPrefs== $value");
-              if (value! == true) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => TeacherHome()),
-                );
-              } else {}
-            });
-          }
-        });
-      }
+      } else {}
+    });
+
+    await HelperFunctions.getStudentLoggedInSharedPreference()
+        .then((value) async {
+      print("Student LoggedIn SharedPrefs== $value");
+      if (value == true) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => StudentHome()),
+        );
+      } else {}
+    });
+
+    await HelperFunctions.getTeacherLoggedInSharedPreference()
+        .then((value) async {
+      print("Teacher LoggedIn SharedPrefs== $value");
+      if (value == true) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => TeacherHome()),
+        );
+      } else {}
     });
   }
 
@@ -94,8 +92,10 @@ class _HomeState extends State<Home> {
             Padding(
               padding: EdgeInsets.only(bottom: 40),
               child: GestureDetector(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LevelPage())),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LevelPage()));
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -20,7 +20,7 @@ class _AdminLoginState extends State<AdminLogin> {
   TextEditingController passwordController = new TextEditingController();
   TextEditingController usernameController = new TextEditingController();
   final formKey = GlobalKey<FormState>();
-  QueryDocumentSnapshot? snapshot;
+  QuerySnapshot? snapshot;
 
   signIn() {
     if (formKey.currentState!.validate()) {
@@ -28,21 +28,20 @@ class _AdminLoginState extends State<AdminLogin> {
       DatabaseMethods().getUserBy(emailController.text).then((val) {
         snapshot = val;
         HelperFunctions.saveAdminNameSharedPreference(
-            snapshot![0]["username"].toString());
+            snapshot!.docs[0]["username"]);
       });
       AuthMethod()
           .signInWithEmailAndPassword(
               emailController.text, passwordController.text)
           .then((value) {
         if (value != null) {
-            HelperFunctions.saveAdminLoggedInSharedPreference(true);
+          HelperFunctions.saveAdminLoggedInSharedPreference(true);
+          print("AdminLogin Shared preff");
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => AdminHome(
-                      // email: emailController.text,
-                      // username: usernameController.text))
-              )));
+                      )));
         }
       });
     }
