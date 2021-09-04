@@ -40,6 +40,13 @@ class DatabaseMethods {
         .snapshots();
   }
 
+  Future<Stream<QuerySnapshot>> getStudentByEnroll(String enroll) async {
+    return FirebaseFirestore.instance
+        .collection("student_users")
+        .where("StudentEnrollmentNo", isEqualTo: enroll)
+        .snapshots();
+  }
+
   Future<int> noOfStudent() async {
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await FirebaseFirestore.instance.collection("student_users").get();

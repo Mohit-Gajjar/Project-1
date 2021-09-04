@@ -1,6 +1,7 @@
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
+import 'package:asms/Management/Profiles/StudentProfile.dart';
 import 'package:flutter/material.dart';
 
 class ManageStudent extends StatefulWidget {
@@ -23,7 +24,9 @@ class _ManageStudentState extends State<ManageStudent> {
                   return StudentTile(snapshot.data.docs[index]["StudentName"],
                       snapshot.data.docs[index]["StudentEnrollmentNo"]);
                 })
-            : Container();
+            : Center(
+                child: CircularProgressIndicator(),
+              );
       });
   @override
   void initState() {
@@ -61,8 +64,15 @@ class StudentTile extends StatelessWidget {
   StudentTile(this.name, this.enroll);
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => StudentProfile(
+                      enroll: enroll,
+                    )));
+      },
       child: ListTile(
         leading: CircleAvatar(
           child: Center(

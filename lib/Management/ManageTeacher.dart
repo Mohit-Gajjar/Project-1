@@ -23,7 +23,9 @@ class _ManageTeacherState extends State<ManageTeacher> {
                   return TeacherTile(snapshot.data.docs[index]["name"],
                       snapshot.data.docs[index]["email"]);
                 })
-            : Container();
+            : Center(
+                child: CircularProgressIndicator(),
+              );
       });
   @override
   void initState() {
@@ -41,7 +43,7 @@ class _ManageTeacherState extends State<ManageTeacher> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: backColor,
+      backgroundColor: backColor,
       appBar: AppBar(
         title: text("Manage Teacher", 16),
         centerTitle: true,
@@ -58,13 +60,13 @@ class _ManageTeacherState extends State<ManageTeacher> {
 class TeacherTile extends StatelessWidget {
   final String email;
   final String name;
-   TeacherTile(this.name,this.email);
+  TeacherTile(this.name, this.email);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {},
-     child: ListTile(
+      child: ListTile(
         leading: CircleAvatar(
           child: Center(
             child: text(name[0].toUpperCase(), 16),
