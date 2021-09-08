@@ -1,6 +1,7 @@
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
+import 'package:asms/Management/Profiles/TeacherProfile.dart';
 import 'package:flutter/material.dart';
 
 class ManageTeacher extends StatefulWidget {
@@ -65,7 +66,10 @@ class TeacherTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (contex) => TeacherProfile()));
+      },
       child: ListTile(
         leading: CircleAvatar(
           child: Center(

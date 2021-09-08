@@ -13,14 +13,6 @@ class StudentProfile extends StatefulWidget {
 }
 
 class _StudentProfileState extends State<StudentProfile> {
-  final String studentName = "";
-  final String studentContact = "";
-  final String dob = "";
-  final String parentsNo = "";
-  final String parentEmail = "";
-  final String studentEmail = "";
-  final String studentEnrollment = "";
-  final String gender = "";
   Timestamp? timeOfCreation;
   Stream? studentInfoStream;
   Widget studentInfo() {
@@ -37,7 +29,6 @@ class _StudentProfileState extends State<StudentProfile> {
                   snapshot.data!.docs[0]["ParentsContactNo"],
                   snapshot.data!.docs[0]["Gender"],
                   snapshot.data!.docs[0]["ParentsEmail"],
-                 
                 )
               : Center(
                   child: CircularProgressIndicator(),
@@ -80,15 +71,15 @@ class _StudentProfileState extends State<StudentProfile> {
 // ignore: must_be_immutable
 class StudentInfo extends StatelessWidget {
   StudentInfo(
-      this.studentName,
-      this.studentContact,
-      this.studentEmail,
-      this.studentEnrollment,
-      this.dob,
-      this.parentsNo,
-      this.gender,
-      this.parentEmail,
-      );
+    this.studentName,
+    this.studentContact,
+    this.studentEmail,
+    this.studentEnrollment,
+    this.dob,
+    this.parentsNo,
+    this.gender,
+    this.parentEmail,
+  );
 
   final String studentName;
   final String studentContact;
@@ -104,19 +95,19 @@ class StudentInfo extends StatelessWidget {
     return ListView(
       children: [
         ListTile(
-          title: text("Name.", 14),
+          title: text("Name", 14),
           subtitle: text(studentName, 16),
         ),
         ListTile(
-          title: text("Student Contact No.", 14),
+          title: text("Student Contact No", 14),
           subtitle: text(studentContact, 16),
         ),
         ListTile(
-          title: text("Student Email.", 14),
+          title: text("Student Email", 14),
           subtitle: text(studentEmail, 16),
         ),
         ListTile(
-          title: text("Student Enrollment No.", 14),
+          title: text("Student Enrollment No", 14),
           subtitle: text(studentEnrollment, 16),
         ),
         ListTile(
@@ -124,15 +115,15 @@ class StudentInfo extends StatelessWidget {
           subtitle: text(dob, 16),
         ),
         ListTile(
-          title: text("Gender.", 14),
+          title: text("Gender", 14),
           subtitle: text(gender, 16),
         ),
         ListTile(
-          title: text("Parents No.", 14),
+          title: text("Parents No", 14),
           subtitle: text(parentsNo, 16),
         ),
         ListTile(
-          title: text("Parents Email.", 14),
+          title: text("Parents Email", 14),
           subtitle: text(parentEmail, 16),
         ),
       ],
