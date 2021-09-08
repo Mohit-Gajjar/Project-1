@@ -2,7 +2,9 @@ import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:flutter/material.dart';
+// import 'package:http/http.dart' as http;
 
 class CreateStudent extends StatefulWidget {
   const CreateStudent({Key? key}) : super(key: key);
@@ -11,9 +13,11 @@ class CreateStudent extends StatefulWidget {
   _CreateStudentState createState() => _CreateStudentState();
 }
 
-
 class _CreateStudentState extends State<CreateStudent> {
   final formKey = GlobalKey<FormState>();
+  String adminName = '';
+  String adminEmail = '';
+  String postfix = "@asmsgroup.edu.in";
   TextEditingController usernameController = new TextEditingController();
   TextEditingController enrollController = new TextEditingController();
   TextEditingController contactController = new TextEditingController();
@@ -21,9 +25,18 @@ class _CreateStudentState extends State<CreateStudent> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController departmentController = new TextEditingController();
   TextEditingController semController = new TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    getAdmin();
+  }
+
+  getAdmin() async {
+    adminName = (await HelperFunctions.getAdminNameSharedPreference())!;
+    adminEmail = (await HelperFunctions.getAdminEmailSharedPreference())!;
+  }
 
   String? _chosenValue;
-
   createStudent() {
     if (formKey.currentState!.validate()) {
       Map<String, dynamic> createdStudentInfo = {
@@ -31,6 +44,7 @@ class _CreateStudentState extends State<CreateStudent> {
         "StudentEnrollmentNo": enrollController.text,
         "StudentContactNo": contactController.text,
         "StudentEmail": emailController.text,
+        "LoginEmail": enrollController.text + postfix,
         "DateOfBirth": "",
         "Gender": "",
         "ParentsContactNo": "",
@@ -42,12 +56,40 @@ class _CreateStudentState extends State<CreateStudent> {
       };
       AuthMethod()
           .createStudentWithEmailPassword(
-              emailController.text, passwordController.text)
+              enrollController.text + postfix, passwordController.text)
           .then((value) {
         DatabaseMethods().createStudentData(createdStudentInfo);
+        // sendEmailPass();
       });
     }
   }
+
+  // Future sendEmailPass() async {
+  //   // final String serviceId = "service_aceebeg";
+  //   // final String templateId = "template_mgr9lgf";
+  //   // final String userId = "user_zMJlrRcqm1Yjp1FWoMiEH";
+
+  //   final url = Uri.parse('http://api.emailjs.com/api/v1.0/email/send');
+  //   final response = await http.post(url,
+  //       headers: {
+  //         'header':'Content-Type: application/json',
+  //         'origin': 'http://localhost'
+  //         },
+  //       body: json.encode({
+  //         'service_id': 'service_aceebeg',
+  //         'template_id': 'template_mgr9lgf',
+  //         'user_id': 'user_zMJlrRcqm1Yjp1FWoMiEH',
+  //         'template_params': {
+  //           'user_name': adminName,
+  //           'reply_to': adminEmail,
+  //           'user_email': emailController.text,
+  //           'user_subject': 'Email And Password',
+  //           'user_messaege':
+  //               "\nHello $usernameController.text \n\n\nHere is your Email and Password:\n Email: $enrollController.textpostfix \ nPassword: $passwordController.text\n\n\n\n\nASMS TEAM"
+  //         }
+  //       }));
+  //   print(response.body);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -120,9 +162,9 @@ class _CreateStudentState extends State<CreateStudent> {
                             width: 10,
                           ),
                           DropdownButton<String>(
-                          dropdownColor: btnColor,
+                            dropdownColor: btnColor,
                             value: _chosenValue,
-                            //elevation: 5,
+                            elevation: 5,
                             style: TextStyle(color: Colors.white),
                             iconEnabledColor: textColor,
                             items: <String>[
@@ -132,14 +174,11 @@ class _CreateStudentState extends State<CreateStudent> {
                               'Civil',
                               'BioMedical',
                               'Enviroment',
-                              
                             ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
-                                value: value,
-                                child: text(value, 15)
-                              );
+                                  value: value, child: text(value, 15));
                             }).toList(),
-                            hint:text("Department", 16),
+                            hint: text("Department", 16),
                             onChanged: (String? value) {
                               setState(() {
                                 _chosenValue = value;
@@ -163,6 +202,10 @@ class _CreateStudentState extends State<CreateStudent> {
                   SizedBox(
                     height: 20,
                   ),
+                  text("Login Email: " + enrollController.text + postfix, 16),
+                  SizedBox(
+                    height: 20,
+                  ),
                   GestureDetector(
                       onTap: () {
                         if (usernameController.text.isNotEmpty &&
@@ -171,6 +214,7 @@ class _CreateStudentState extends State<CreateStudent> {
                             emailController.text.isNotEmpty) {
                           setState(() {
                             createStudent();
+
                             print("Student Is Added");
                             contactController.clear();
                             passwordController.clear();

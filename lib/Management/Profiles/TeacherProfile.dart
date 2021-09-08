@@ -40,10 +40,9 @@ class _TeacherProfileState extends State<TeacherProfile> {
 
   getTeacherInfo() {
     DatabaseMethods().getTeachers().then((val) {
-      teacherInfoStream=val;
-       setState(() {});
+      teacherInfoStream = val;
+      setState(() {});
     });
-   
   }
 
   @override
@@ -91,7 +90,7 @@ class TeacherInfo extends StatelessWidget {
           subtitle: text(name, 16),
         ),
         ListTile(
-          title: text("Teacher Contact No", 14),
+          title: text("Teacher`s Contact No", 14),
           subtitle: text(contact, 16),
         ),
         ListTile(
