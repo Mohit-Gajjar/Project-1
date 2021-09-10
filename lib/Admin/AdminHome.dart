@@ -12,7 +12,8 @@ import 'package:asms/Management/ManageStudent.dart';
 import 'package:asms/Management/ManageTeacher.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
 import 'package:flutter/material.dart';
-
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class AdminHome extends StatefulWidget {
   AdminHome({
@@ -27,6 +28,9 @@ class _AdminHomeState extends State<AdminHome> {
   int student_counter = 0;
   // ignore: non_constant_identifier_names
   int teacher_counter = 0;
+
+  int onGoingSem = 0;
+  String department = 'NULL';
   String name = " ";
   String email = " ";
   getCount() async {
@@ -44,6 +48,13 @@ class _AdminHomeState extends State<AdminHome> {
     getCount();
   }
 
+  List<String> cardTitle = ['123', '124', '125', '126'];
+  List<String> cardSubTitle = [
+    'Total Students',
+    'Total Teachers',
+    'Total Subjects',
+    'Total Lectures'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,232 +93,29 @@ class _AdminHomeState extends State<AdminHome> {
         child: Column(
           children: [
             Container(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Card(
-                      color: btnColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 25,
-                        height: 170,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: text(student_counter.toString(), 67.0),
-                                subtitle: text("Total Students", 27.0),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 27),
-                              padding: EdgeInsets.only(right: 20),
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateStudent()));
-                                    },
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      radius: 40,
-                                      backgroundImage:
-                                          AssetImage('assets/add.png'),
-                                    ),
-                                  ),
-                                  text("Add", 25),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+              height: 200,
+              child: Swiper(
+                itemCount: 4,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 3),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: btnColor),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          text(cardTitle[index], 80),
+                          text(cardSubTitle[index], 30)
+                        ],
                       ),
                     ),
-                    Card(
-                      color: btnColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 25,
-                        height: 170,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: text(teacher_counter.toString(), 67.0),
-                                subtitle: text("Total Teachers", 27.0),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 27),
-                              padding: EdgeInsets.only(right: 20),
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateTeacher()));
-                                    },
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      radius: 40,
-                                      backgroundImage:
-                                          AssetImage('assets/add.png'),
-                                    ),
-                                  ),
-                                  text("Add", 25),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      color: btnColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 25,
-                        height: 170,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: text("1", 67.0),
-                                subtitle: text("Total HODs", 27.0),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 27),
-                              padding: EdgeInsets.only(right: 20),
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateHODs()));
-                                    },
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      radius: 40,
-                                      backgroundImage:
-                                          AssetImage('assets/add.png'),
-                                    ),
-                                  ),
-                                  text("Add", 25),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      color: btnColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 25,
-                        height: 170,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: text("38", 67.0),
-                                subtitle: text("Total Subjects", 27.0),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 27),
-                              padding: EdgeInsets.only(right: 20),
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateSubject()));
-                                    },
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      radius: 40,
-                                      backgroundImage:
-                                          AssetImage('assets/add.png'),
-                                    ),
-                                  ),
-                                  text("Add", 25),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-                      color: btnColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 25,
-                        height: 170,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: text("210", 67.0),
-                                subtitle: text("Total Lectures", 27.0),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 27),
-                              padding: EdgeInsets.only(right: 20),
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateLectures()));
-                                    },
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      radius: 40,
-                                      backgroundImage:
-                                          AssetImage('assets/add.png'),
-                                    ),
-                                  ),
-                                  text("Add", 25),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                  );
+                },
+                pagination: SwiperPagination(
+                  
                 ),
               ),
             ),
@@ -315,41 +123,14 @@ class _AdminHomeState extends State<AdminHome> {
               height: 15,
             ),
             Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: boxColor, borderRadius: BorderRadius.circular(18)),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        text('Ongoing Semester: ', 20),
-                        text('5', 20),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 20),
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.settings,
-                              size: 50,
-                              color: textColor,
-                            ),
-                          ),
-                        ),
-                        text("Manage", 16)
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                    color: boxColor, borderRadius: BorderRadius.circular(18)),
+                child: ListTile(
+                  title: text('Ongoing Semester: ' + onGoingSem.toString(), 20),
+                  subtitle: text('Depertment: ' + department.toString(), 20),
+                )),
             SizedBox(
               height: 15,
             ),
@@ -445,7 +226,14 @@ class _AdminHomeState extends State<AdminHome> {
                   });
                 },
               ),
-              
+              ListTile(
+                title: text("Edit University", 16),
+                leading: const Icon(
+                  Icons.business,
+                  color: textColor,
+                ),
+                onTap: () {},
+              ),
             ],
           ),
         ),

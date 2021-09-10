@@ -214,7 +214,6 @@ class _CreateStudentState extends State<CreateStudent> {
                             emailController.text.isNotEmpty) {
                           setState(() {
                             createStudent();
-
                             print("Student Is Added");
                             contactController.clear();
                             passwordController.clear();

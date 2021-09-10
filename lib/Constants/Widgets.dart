@@ -68,7 +68,7 @@ Widget text_underline(String name, double num) {
   );
 }
 
-Widget annsbox(String title, subtitle, double titleSize, subtitleSize,
+Widget displayBox(String title,String subtitle, double titleSize, subtitleSize,
     BuildContext context) {
   return Card(
     color: btnColor,

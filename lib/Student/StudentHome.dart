@@ -60,11 +60,11 @@ class _StudentHomeState extends State<StudentHome> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    annsbox("Webinar on Game Development", "Date: 12-July-2021",
+                    displayBox("Webinar on Game Development", "Date: 12-July-2021",
                         30.0, 20.0, context),
-                    annsbox("Webinar on App Development", "Date: 12-July-2021",
+                    displayBox("Webinar on App Development", "Date: 12-July-2021",
                         30.0, 20.0, context),
-                    annsbox("Webinar on UI/UX", "Date: 12-July-2021", 30.0,
+                    displayBox("Webinar on UI/UX", "Date: 12-July-2021", 30.0,
                         20.0, context),
                   ],
                 ),
