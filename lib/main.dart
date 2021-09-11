@@ -8,10 +8,14 @@ import 'package:asms/Teacher/TeacherHome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-Future<void> main() async {
+main() {
+  firebaseInitiallize();
+  runApp(MyApp());
+}
+
+Future<void> firebaseInitiallize() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

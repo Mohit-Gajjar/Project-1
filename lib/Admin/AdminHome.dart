@@ -1,19 +1,15 @@
 import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
-import 'package:asms/Create%20Users/CreateHOD.dart';
-import 'package:asms/Create%20Users/CreateLectures.dart';
 import 'package:asms/Create%20Users/CreateStudent.dart';
-import 'package:asms/Create%20Users/CreateSubjects.dart';
 import 'package:asms/Create%20Users/CreateTeacher.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
 import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/Management/ManageStudent.dart';
 import 'package:asms/Management/ManageTeacher.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:flutter_swiper/flutter_swiper.dart';
 
 class AdminHome extends StatefulWidget {
   AdminHome({
@@ -48,7 +44,12 @@ class _AdminHomeState extends State<AdminHome> {
     getCount();
   }
 
-  List<String> cardTitle = ['123', '124', '125', '126'];
+  // List<Widget> cardTitle = [
+  //   ListTile(
+  //     title: text(student.toString(), 80),
+  //   ),
+  // ];
+
   List<String> cardSubTitle = [
     'Total Students',
     'Total Teachers',
@@ -92,32 +93,79 @@ class _AdminHomeState extends State<AdminHome> {
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            Container(
-              height: 200,
-              child: Swiper(
-                itemCount: 4,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 3),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: btnColor),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          text(cardTitle[index], 80),
-                          text(cardSubTitle[index], 30)
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                pagination: SwiperPagination(
-                  
-                ),
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 200,
+                viewportFraction: 1.0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 5),
+                autoPlayAnimationDuration: Duration(milliseconds: 1000),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                scrollDirection: Axis.horizontal,
               ),
+              items: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreateStudent()));
+                  },
+                  child: Card(
+                    color: btnColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)),
+                    child: ListTile(
+                      title: text(student_counter.toString(), 80),
+                      subtitle: text("Total Students", 30),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreateTeacher()));
+                  },
+                  child: Card(
+                    color: btnColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)),
+                    child: ListTile(
+                      title: text(teacher_counter.toString(), 80),
+                      subtitle: text("Total Teachers", 30),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Card(
+                    color: btnColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)),
+                    child: ListTile(
+                      title: text('123', 80),
+                      subtitle: text("Total Subjects", 30),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Card(
+                    color: btnColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)),
+                    child: ListTile(
+                      title: text('1234', 80),
+                      subtitle: text('Total HODs', 30),
+                    ),
+                  ),
+                )
+              ],
             ),
             SizedBox(
               height: 15,

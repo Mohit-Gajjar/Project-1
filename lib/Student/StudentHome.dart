@@ -21,15 +21,15 @@ class _StudentHomeState extends State<StudentHome> {
   getData() async {
     name = (await HelperFunctions.getStudentNameSharedPreference())!;
     email = (await HelperFunctions.getStudentEmailSharedPreference())!;
-  setState(() {
-    
-  });
+    setState(() {});
   }
-   @override
+
+  @override
   void initState() {
     super.initState();
     getData();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,10 +60,10 @@ class _StudentHomeState extends State<StudentHome> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    displayBox("Webinar on Game Development", "Date: 12-July-2021",
-                        30.0, 20.0, context),
-                    displayBox("Webinar on App Development", "Date: 12-July-2021",
-                        30.0, 20.0, context),
+                    displayBox("Webinar on Game Development",
+                        "Date: 12-July-2021", 30.0, 20.0, context),
+                    displayBox("Webinar on App Development",
+                        "Date: 12-July-2021", 30.0, 20.0, context),
                     displayBox("Webinar on UI/UX", "Date: 12-July-2021", 30.0,
                         20.0, context),
                   ],

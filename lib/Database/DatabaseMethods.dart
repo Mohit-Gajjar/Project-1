@@ -21,7 +21,7 @@ class DatabaseMethods {
   getStudentBy(String email) async {
     return await FirebaseFirestore.instance
         .collection("student_users")
-        .where("StudentEmail", isEqualTo: email)
+        .where("LoginEmail", isEqualTo: email)
         .get();
   }
 

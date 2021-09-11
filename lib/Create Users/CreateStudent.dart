@@ -59,7 +59,7 @@ class _CreateStudentState extends State<CreateStudent> {
               enrollController.text + postfix, passwordController.text)
           .then((value) {
         DatabaseMethods().createStudentData(createdStudentInfo);
-        // sendEmailPass();
+        // sendEmailPass(); 
       });
     }
   }

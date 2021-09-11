@@ -6,7 +6,6 @@ import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/Student/StudentHome.dart';
 import 'package:asms/Constants/Widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 
 class StudentLogin extends StatefulWidget {
@@ -22,10 +21,11 @@ class _StudentLoginState extends State<StudentLogin> {
   TextEditingController passwordController = new TextEditingController();
   TextEditingController enrollController = new TextEditingController();
   QuerySnapshot? snapshot;
+  DatabaseMethods databaseMethods = new DatabaseMethods();
   signIn() async {
     HelperFunctions.saveStudentEmailSharedPreference(emailController.text);
     if (formKey.currentState!.validate()) {
-      DatabaseMethods().getStudentBy(emailController.text).then((val) {
+      databaseMethods.getStudentBy(emailController.text).then((val) {
         snapshot = val;
         HelperFunctions.saveStudentNameSharedPreference(
             snapshot!.docs[0]["StudentName"]);
@@ -37,10 +37,7 @@ class _StudentLoginState extends State<StudentLogin> {
         if (value != null) {
           HelperFunctions.saveStudentLoggedInSharedPreference(true);
           Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => StudentHome(
-                      )));
+              context, MaterialPageRoute(builder: (context) => StudentHome()));
         }
       });
     }
