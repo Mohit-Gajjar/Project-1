@@ -35,9 +35,7 @@ dependencies:
   firebase_auth: ^3.0.2
   shared_preferences: ^2.0.7
   mailer: ^5.0.2
-  dio: ^4.0.0
   http: ^0.13.3
-  flutter_swiper: ^1.1.6
   carousel_slider: ^4.0.0
   
 

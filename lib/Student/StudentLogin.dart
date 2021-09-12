@@ -21,11 +21,10 @@ class _StudentLoginState extends State<StudentLogin> {
   TextEditingController passwordController = new TextEditingController();
   TextEditingController enrollController = new TextEditingController();
   QuerySnapshot? snapshot;
-  DatabaseMethods databaseMethods = new DatabaseMethods();
   signIn() async {
     HelperFunctions.saveStudentEmailSharedPreference(emailController.text);
     if (formKey.currentState!.validate()) {
-      databaseMethods.getStudentBy(emailController.text).then((val) {
+      DatabaseMethods().getStudentBy(emailController.text).then((val) {
         snapshot = val;
         HelperFunctions.saveStudentNameSharedPreference(
             snapshot!.docs[0]["StudentName"]);

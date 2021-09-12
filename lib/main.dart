@@ -8,14 +8,10 @@ import 'package:asms/Teacher/TeacherHome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-main() {
-  firebaseInitiallize();
-  runApp(MyApp());
-}
-
-Future<void> firebaseInitiallize() async {
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -86,30 +82,32 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: backColor,
       body: Container(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Image(height: 150, image: AssetImage('assets/0.png')),
-            imageBox('assets/4.png', 480),
-            Padding(
-              padding: EdgeInsets.only(bottom: 40),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LevelPage()));
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    text("Get Started", 29),
-                    Image(height: 60, image: AssetImage('assets/5.png'))
-                  ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 15,
+              ),
+              Image(height: 150, image: AssetImage('assets/0.png')),
+              imageBox('assets/4.png', 480),
+              Padding(
+                padding: EdgeInsets.only(bottom: 40),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LevelPage()));
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      text("Get Started", 29),
+                      Image(height: 60, image: AssetImage('assets/5.png'))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -44,18 +44,6 @@ class _AdminHomeState extends State<AdminHome> {
     getCount();
   }
 
-  // List<Widget> cardTitle = [
-  //   ListTile(
-  //     title: text(student.toString(), 80),
-  //   ),
-  // ];
-
-  List<String> cardSubTitle = [
-    'Total Students',
-    'Total Teachers',
-    'Total Subjects',
-    'Total Lectures'
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
