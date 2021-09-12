@@ -64,7 +64,7 @@ class DatabaseMethods {
   getTeacherBy(String email) async {
     return await FirebaseFirestore.instance
         .collection("teacher_users")
-        .where("email", isEqualTo: email)
+        .where("LoginEmail", isEqualTo: email)
         .get();
   }
 

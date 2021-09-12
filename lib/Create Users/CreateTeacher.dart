@@ -12,6 +12,7 @@ class CreateTeacher extends StatefulWidget {
 }
 
 class _CreateTeacherState extends State<CreateTeacher> {
+  String postfix = "@asmsgroup.edu.in";
   final formKey = GlobalKey<FormState>();
   TextEditingController usernameController = new TextEditingController();
   TextEditingController subjectController = new TextEditingController();
@@ -25,6 +26,7 @@ class _CreateTeacherState extends State<CreateTeacher> {
       Map<String, dynamic> createdTeacherInfo = {
         "name": usernameController.text,
         "email": emailController.text,
+        "LoginEmail": usernameController.text.replaceAll(" ", "").toLowerCase() + postfix,
         "contact": contactController.text,
         "assigned_subject": subjectController.text,
         "assigned_semester": "HardCoded Value = sem5",
@@ -33,7 +35,7 @@ class _CreateTeacherState extends State<CreateTeacher> {
       };
       AuthMethod()
           .createTeacherWithEmailPassword(
-              emailController.text, passwordController.text)
+              usernameController.text.replaceAll(" ", "").toLowerCase() + postfix, passwordController.text)
           .then((value) {
         DatabaseMethods().createTeacherData(createdTeacherInfo);
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -140,6 +142,14 @@ class _CreateTeacherState extends State<CreateTeacher> {
                   ),
                   inputFieldPass("Enter Password", Icons.vpn_key, context,
                       passwordController),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  text(
+                      "Login Email: " +
+                          usernameController.text.replaceAll(" ", "").toLowerCase() +
+                          postfix,
+                      16),
                   SizedBox(
                     height: 20,
                   ),

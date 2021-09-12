@@ -25,6 +25,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                   snapshot.data!.docs[0]["email"],
                   snapshot.data!.docs[0]["name"],
                   snapshot.data!.docs[0]["role"],
+                   snapshot.data!.docs[0]["LoginEmail"]
                 )
               : Center(
                   child: CircularProgressIndicator(),
@@ -71,6 +72,7 @@ class TeacherInfo extends StatelessWidget {
     this.email,
     this.name,
     this.role,
+    this.loginEmail
   );
 
   final String department;
@@ -80,6 +82,7 @@ class TeacherInfo extends StatelessWidget {
   final String email;
   final String name;
   final String role;
+  final String loginEmail;
 
   @override
   Widget build(BuildContext context) {
