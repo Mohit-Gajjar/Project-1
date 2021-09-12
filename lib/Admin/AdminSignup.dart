@@ -1,8 +1,9 @@
-import 'package:asms/Admin/AdminHome.dart';
 import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
 import 'package:asms/Database/DatabaseMethods.dart';
+import 'package:asms/LocalDatabase/SharedPrefs.dart';
+import 'package:asms/OTP/Levels/EmailVerification.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -31,22 +32,24 @@ class _AdminSiginUpState extends State<AdminSiginUp> {
         "email": emailController.text,
         "contactNo": contactController.text,
         "dateOfAccountCreation": DateTime.now(),
-        "role": "admin"
+        "role": "Admin"
       };
       setState(() {
         isLoading = true;
       });
       authMethod
-          .signUpWithEmailAndPassword(
+          .adminSignUpWithEmailAndPassword(
               emailController.text, confirmPasswordController.text)
           .then((value) {
         DatabaseMethods().uploadUserInfo(userInfoMap);
+        HelperFunctions.saveAdminNameSharedPreference(usernameController.text);
+        HelperFunctions.saveAdminEmailSharedPreference(emailController.text);
+        HelperFunctions.saveAdminLoggedInSharedPreference(true);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => AdminHome(
-                      // username: usernameController.text,
-                      // email: emailController.text,
+                builder: (context) => EmailVerification(
+                      email: emailController.text,
                     )));
       });
     }
@@ -55,10 +58,9 @@ class _AdminSiginUpState extends State<AdminSiginUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  
       backgroundColor: backColor,
-        body: SingleChildScrollView(
-      child: Container(
+      body: SingleChildScrollView(
+        child: Container(
           child: Form(
             key: formKey,
             child: Column(

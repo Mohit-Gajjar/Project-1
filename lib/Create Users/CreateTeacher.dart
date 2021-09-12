@@ -19,6 +19,7 @@ class _CreateTeacherState extends State<CreateTeacher> {
   TextEditingController passwordController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
   String? _chosenValue;
+  final snackBar = SnackBar(content: Text('Teacher Created Sucessfully'));
   createTeacher() {
     if (formKey.currentState!.validate()) {
       Map<String, dynamic> createdTeacherInfo = {
@@ -35,6 +36,7 @@ class _CreateTeacherState extends State<CreateTeacher> {
               emailController.text, passwordController.text)
           .then((value) {
         DatabaseMethods().createTeacherData(createdTeacherInfo);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
         print(value.toString());
       });
     }
@@ -45,7 +47,7 @@ class _CreateTeacherState extends State<CreateTeacher> {
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: text("Add Student", 16),
+            title: text("Add Teacher", 16),
             centerTitle: true,
             elevation: 0,
             actions: [

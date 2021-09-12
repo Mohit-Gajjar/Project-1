@@ -35,7 +35,7 @@ class _CreateStudentState extends State<CreateStudent> {
     adminName = (await HelperFunctions.getAdminNameSharedPreference())!;
     adminEmail = (await HelperFunctions.getAdminEmailSharedPreference())!;
   }
-
+ final snackBar = SnackBar(content: Text('Student Created Sucessfully'));
   String? _chosenValue;
   createStudent() {
     if (formKey.currentState!.validate()) {
@@ -59,6 +59,7 @@ class _CreateStudentState extends State<CreateStudent> {
               enrollController.text + postfix, passwordController.text)
           .then((value) {
         DatabaseMethods().createStudentData(createdStudentInfo);
+           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // sendEmailPass(); 
       });
     }
