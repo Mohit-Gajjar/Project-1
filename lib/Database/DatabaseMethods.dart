@@ -51,7 +51,7 @@ class DatabaseMethods {
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await FirebaseFirestore.instance.collection("student_users").get();
     var count = snapshot.size;
-    print("Number of users" + count.toString());
+    print("Number of Students " + count.toString());
     return count;
   }
 
@@ -68,15 +68,38 @@ class DatabaseMethods {
         .get();
   }
 
-// getTeacherName(String email) async {
-//   return await FirebaseFirestore.instance.collection("teacher_users")
-// }
+  createSubjectData(createdSubjectMap) async {
+    return await FirebaseFirestore.instance
+        .collection("subjects")
+        .add(createdSubjectMap);
+  }
+
+  createLectureData(createdLecturesMap) async {
+    return await FirebaseFirestore.instance
+        .collection("lectures")
+        .add(createdLecturesMap);
+  }
 
   Future<int> noOfTeachers() async {
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await FirebaseFirestore.instance.collection("teacher_users").get();
     var count = snapshot.size;
-    print("Number of users" + count.toString());
+    print("Number of Teachers " + count.toString());
+    return count;
+  }
+
+  Future<int> noOfSubjects() async {
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance.collection("subjects").get();
+    var count = snapshot.size;
+    print("Number of Subjects " + count.toString());
+    return count;
+  }
+    Future<int> noOfLectures() async {
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance.collection("lectures").get();
+    var count = snapshot.size;
+    print("Number of Lectures " + count.toString());
     return count;
   }
 }

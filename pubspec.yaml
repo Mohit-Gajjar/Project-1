@@ -37,6 +37,7 @@ dependencies:
   mailer: ^5.0.2
   http: ^0.13.3
   carousel_slider: ^4.0.0
+  flutter_datetime_picker: ^1.5.1
   
 
 dev_dependencies:

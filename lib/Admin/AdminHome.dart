@@ -1,13 +1,19 @@
 import 'package:asms/Authentication/Auth_service.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
-import 'package:asms/Create%20Users/CreateStudent.dart';
-import 'package:asms/Create%20Users/CreateTeacher.dart';
+import 'package:asms/Create%20Pages/CreateLectures.dart';
+import 'package:asms/Create%20Pages/CreateStudent.dart';
+import 'package:asms/Create%20Pages/CreateSubjects.dart';
+import 'package:asms/Create%20Pages/CreateTeacher.dart';
+
 import 'package:asms/Database/DatabaseMethods.dart';
 import 'package:asms/LocalDatabase/SharedPrefs.dart';
+import 'package:asms/Management/ManageLectures.dart';
 import 'package:asms/Management/ManageStudent.dart';
+import 'package:asms/Management/ManageSubject.dart';
 import 'package:asms/Management/ManageTeacher.dart';
 import 'package:asms/OTP/Levels/LevelsPage.dart';
+import 'package:asms/University/ManageUniversity.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +30,10 @@ class _AdminHomeState extends State<AdminHome> {
   int student_counter = 0;
   // ignore: non_constant_identifier_names
   int teacher_counter = 0;
-
+  // ignore: non_constant_identifier_names
+  int subject_counter = 0;
+  // ignore: non_constant_identifier_names
+  int lecture_counter = 0;
   int onGoingSem = 0;
   String department = 'NULL';
   String name = " ";
@@ -34,6 +43,8 @@ class _AdminHomeState extends State<AdminHome> {
     email = (await HelperFunctions.getAdminEmailSharedPreference())!;
     student_counter = await DatabaseMethods().noOfStudent();
     teacher_counter = await DatabaseMethods().noOfTeachers();
+    subject_counter = await DatabaseMethods().noOfSubjects();
+    lecture_counter = await DatabaseMethods().noOfLectures();
     setState(() {});
   }
 
@@ -130,26 +141,36 @@ class _AdminHomeState extends State<AdminHome> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreateSubject()));
+                  },
                   child: Card(
                     color: btnColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18)),
                     child: ListTile(
-                      title: text('123', 80),
+                      title: text(subject_counter.toString(), 80),
                       subtitle: text("Total Subjects", 30),
                     ),
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreateLectures()));
+                  },
                   child: Card(
                     color: btnColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18)),
                     child: ListTile(
-                      title: text('1234', 80),
-                      subtitle: text('Total HODs', 30),
+                      title: text(lecture_counter.toString(), 80),
+                      subtitle: text('Total Lectures', 30),
                     ),
                   ),
                 )
@@ -200,11 +221,21 @@ class _AdminHomeState extends State<AdminHome> {
                     Column(
                       children: [
                         GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ManageSubject()));
+                            },
                             child: gridTile(
                                 "Manage Subject", "assets/1.png", context)),
                         GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ManageLectures()));
+                            },
                             child: gridTile(
                                 "Manage Lecture", "assets/1.png", context)),
                       ],
@@ -268,7 +299,12 @@ class _AdminHomeState extends State<AdminHome> {
                   Icons.business,
                   color: textColor,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ManageUniversity()));
+                },
               ),
             ],
           ),
