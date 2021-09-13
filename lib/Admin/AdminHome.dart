@@ -5,7 +5,6 @@ import 'package:asms/Create%20Pages/CreateLectures.dart';
 import 'package:asms/Create%20Pages/CreateStudent.dart';
 import 'package:asms/Create%20Pages/CreateSubjects.dart';
 import 'package:asms/Create%20Pages/CreateTeacher.dart';
-
 import 'package:asms/Database/DatabaseMethods.dart';
 import 'package:asms/LocalDatabase/SharedPrefs.dart';
 import 'package:asms/Management/ManageLectures.dart';

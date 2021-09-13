@@ -151,7 +151,7 @@ Widget gridTile(String title, String assetImage, BuildContext context) {
   return Container(
     margin: EdgeInsets.all(5),
     height: 160,
-    width: 160,
+    width: 220,
 
     decoration:
         BoxDecoration(color: btnColor, borderRadius: BorderRadius.circular(18)),

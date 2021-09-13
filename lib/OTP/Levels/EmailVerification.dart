@@ -19,7 +19,7 @@ class _EmailVerificationState extends State<EmailVerification> {
   final _auth = FirebaseAuth.instance;
   Future<void> checkEmailVerified() async {
     user = _auth.currentUser;
-    await user!.reload();
+    // await user!.reload();
     if (user!.emailVerified) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => AdminHome()));

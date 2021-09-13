@@ -14,7 +14,6 @@ class LevelPage extends StatefulWidget {
 }
 
 class _LevelPageState extends State<LevelPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
