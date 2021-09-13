@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:asms/Admin/AdminHome.dart';
 import 'package:asms/Constants/Constants.dart';
 import 'package:asms/Constants/Widgets.dart';
@@ -46,11 +45,6 @@ class _EmailVerificationState extends State<EmailVerification> {
           ),
           GestureDetector(
               onTap: () {
-                //   bool check;
-                //   check = checkEmailVerified() as bool;
-                //   if (check == false) {
-                //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                //   }
                 checkEmailVerified();
               },
               child: btn("Verified", 150))
